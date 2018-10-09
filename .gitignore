@@ -1,3 +1,5 @@
 .idea/
 crmspecs.iml
 target/
+/target/
+/test-output/
