@@ -1,5 +1,8 @@
 package com.pratice.fat_free_crm_qa;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,12 +10,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class LoginTest {
   private WebDriver driver;
@@ -65,4 +66,24 @@ public class LoginTest {
     //      verifyingErrorMessageForUsername.assertTrue(errorMessageForUsername.isDisplayed(),
     // "Invalid username or password error message is not present on the homepage");
   }
+  
+  @Test
+  public void LoginWithInValidPasswordCredientals() {
+   // verify error message present on login page
+      WebElement loginTextfield = driver.findElement(By.id("authentication_username"));
+      loginTextfield.sendKeys("heather");
+      WebElement loginPasswordfield = driver.findElement(By.id("authentication_password"));
+      loginPasswordfield.sendKeys("sdgfsjfgsdjf");
+      WebElement loginButton = driver.findElement(By.name("commit"));
+      loginButton.click();
+
+      WebDriverWait wait = new WebDriverWait(driver, 30);
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("flash")));
+  }
+  
+  @AfterClass
+  public void tearDown() {
+      driver.quit();
+  }
+  
 }
