@@ -81,6 +81,11 @@ public class LoginTest {
       wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("flash")));
   }
   
+  @Test
+  public void VerifyAllTabsOnDashboardPage() {
+      
+  }
+  
   @AfterClass
   public void tearDown() {
       driver.quit();
