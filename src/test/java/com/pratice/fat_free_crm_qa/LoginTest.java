@@ -3,20 +3,28 @@ package com.pratice.fat_free_crm_qa;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class LoginTest {
   private WebDriver driver;
   private String URL = "http://qacrm.herokuapp.com/login";
 
   @BeforeClass
-  public void SetUp() {
-    driver = new ChromeDriver();
+  public void SetUp() throws MalformedURLException {
+    driver =
+        new RemoteWebDriver(
+            new URL(
+                "http://pype-se-alb-1nslzg7mzvwrj-1482060190.us-east-1.elb.amazonaws.com/wd/hub"),
+            DesiredCapabilities.chrome());
     driver.get(URL);
   }
 
@@ -57,6 +65,4 @@ public class LoginTest {
     //      verifyingErrorMessageForUsername.assertTrue(errorMessageForUsername.isDisplayed(),
     // "Invalid username or password error message is not present on the homepage");
   }
-  
-  
 }
