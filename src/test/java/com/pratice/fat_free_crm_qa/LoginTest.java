@@ -23,9 +23,7 @@ public class LoginTest {
   @BeforeClass
   public void SetUp() throws MalformedURLException {
     // driver = new ChromeDriver();
-    driver =
-        new RemoteWebDriver(
-            new URL(
+    driver = new RemoteWebDriver(new URL(
                 "http://pype-se-alb-1nslzg7mzvwrj-1482060190.us-east-1.elb.amazonaws.com/wd/hub"),
             DesiredCapabilities.chrome());
     driver.get(URL);
