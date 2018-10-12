@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -21,6 +22,7 @@ public class LoginTest {
 
   @BeforeClass
   public void SetUp() throws MalformedURLException {
+    // driver = new ChromeDriver();
     driver =
         new RemoteWebDriver(
             new URL(
@@ -66,29 +68,42 @@ public class LoginTest {
     //      verifyingErrorMessageForUsername.assertTrue(errorMessageForUsername.isDisplayed(),
     // "Invalid username or password error message is not present on the homepage");
   }
-  
+
   @Test
   public void LoginWithInValidPasswordCredientals() {
-   // verify error message present on login page
-      WebElement loginTextfield = driver.findElement(By.id("authentication_username"));
-      loginTextfield.sendKeys("heather");
-      WebElement loginPasswordfield = driver.findElement(By.id("authentication_password"));
-      loginPasswordfield.sendKeys("sdgfsjfgsdjf");
-      WebElement loginButton = driver.findElement(By.name("commit"));
-      loginButton.click();
+    // verify error message present on login page
+    WebElement loginTextfield = driver.findElement(By.id("authentication_username"));
+    loginTextfield.sendKeys("heather");
+    WebElement loginPasswordfield = driver.findElement(By.id("authentication_password"));
+    loginPasswordfield.sendKeys("sdgfsjfgsdjf");
+    WebElement loginButton = driver.findElement(By.name("commit"));
+    loginButton.click();
 
-      WebDriverWait wait = new WebDriverWait(driver, 30);
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("flash")));
+    WebDriverWait wait = new WebDriverWait(driver, 30);
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("flash")));
   }
-  
+
   @Test
-  public void VerifyAllTabsOnDashboardPage() {
-      
+  public void JavaScriptExecutor() {
+    WebElement loginTextfield = driver.findElement(By.id("authentication_username"));
+    loginTextfield.sendKeys("heather");
+    WebElement loginPasswordfield = driver.findElement(By.id("authentication_password"));
+    loginPasswordfield.sendKeys("heather");
+    WebElement loginButton = driver.findElement(By.name("commit"));
+    loginButton.click();
+
+    JavascriptExecutor js = ((JavascriptExecutor) driver);
+    js.executeScript("scroll(0,1000);");
+    WebElement aboutFatFreeCRMLink =
+        driver.findElement(By.xpath("//a[@title='About Fat Free CRM']"));
+    SoftAssert aboutLink = new SoftAssert();
+    aboutLink.assertTrue(
+        aboutFatFreeCRMLink.isDisplayed(),
+        "About Fat Free CRM link is not present on the homepage");
   }
-  
+
   @AfterClass
   public void tearDown() {
-      driver.quit();
+    driver.quit();
   }
-  
 }
