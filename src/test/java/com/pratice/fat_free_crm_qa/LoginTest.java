@@ -11,8 +11,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -20,7 +20,7 @@ public class LoginTest {
   private WebDriver driver;
   private String URL = "http://qacrm.herokuapp.com/login";
 
-  @BeforeClass
+  @BeforeMethod
   public void SetUp() throws MalformedURLException {
     // driver = new ChromeDriver();
     driver = new RemoteWebDriver(new URL(
@@ -100,7 +100,7 @@ public class LoginTest {
         "About Fat Free CRM link is not present on the homepage");
   }
 
-  @AfterClass
+  @AfterMethod
   public void tearDown() {
     driver.quit();
   }
