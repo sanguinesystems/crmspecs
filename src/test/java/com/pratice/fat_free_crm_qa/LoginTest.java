@@ -99,7 +99,7 @@ public class LoginTest {
         aboutFatFreeCRMLink.isDisplayed(),
         "About Fat Free CRM link is not present on the homepage");
   }
-
+  
   @AfterMethod
   public void tearDown() {
     driver.quit();
