@@ -34,7 +34,7 @@ public class DashboardLeftPanelLists {
     //Verify all the left panel list present on the dashboard page
     WebElement leftpaneGlobalLists = driver.findElement(By.xpath("//div[@class='caption' and .//text()='Global lists']"));
     WebElement leftpaneMyLists = driver.findElement(By.xpath("//div[@class='caption' and text()='My lists']"));
-
+    leftpaneMyLists.click();
   }
 
   @AfterMethod
