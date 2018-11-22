@@ -1,8 +1,5 @@
 package com.pratice.fat_free_crm_qa;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,16 +13,24 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class LoginTest {
   private WebDriver driver;
   private String URL = "http://qacrm.herokuapp.com/login";
 
   @BeforeMethod
   public void SetUp() throws MalformedURLException {
-    // driver = new ChromeDriver();
-    driver = new RemoteWebDriver(new URL(
-                "http://pype-se-alb-1nslzg7mzvwrj-1482060190.us-east-1.elb.amazonaws.com/wd/hub"),
-            DesiredCapabilities.chrome());
+    DesiredCapabilities capabilities = new DesiredCapabilities();
+    capabilities.setBrowserName("firefox");
+    capabilities.setVersion("");
+    capabilities.setCapability("enableVNC", true);
+    capabilities.setCapability("enableVideo", false);
+
+    driver =
+        new RemoteWebDriver(
+            new URL("http://ec2-54-221-14-113.compute-1.amazonaws.com:4444/wd/hub/"), capabilities);
     driver.get(URL);
   }
 
